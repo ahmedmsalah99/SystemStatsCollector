@@ -52,9 +52,7 @@ void read_conf(const char *filename) {
     printf("file opened\n");
     char line[MAX_LINE];
     while (fgets(line, sizeof(line), fp)) {
-        printf("line %s \n",line);
         char *trimmed = trim(line);
-         printf("trimmed line %s \n",trimmed);
         // Ignore comments and empty lines
         if (trimmed[0] == '#' || trimmed[0] == '\0')
             continue;
