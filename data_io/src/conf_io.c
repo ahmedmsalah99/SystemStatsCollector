@@ -15,7 +15,30 @@ char *trim(char *str) {
     end[1] = '\0';
     return str;
 }
-
+// Check if directory exists and create it if it doesn't
+int ensure_directory_exists(const char *path) {
+    struct stat st = {0};
+    
+    // Check if directory exists
+    if (stat(path, &st) == 0) {
+        // Path exists, check if it's a directory
+        if (S_ISDIR(st.st_mode)) {
+            return 0; // Directory exists
+        } else {
+            printf("Error: %s exists but is not a directory\n", path);
+            return -1;
+        }
+    }
+    
+    // Directory doesn't exist, try to create it
+    if (mkdir(path, 0755) == 0) {
+        printf("Created directory: %s\n", path);
+        return 0;
+    } else {
+        printf("Failed to create directory %s: %s\n", path, strerror(errno));
+        return -1;
+    }
+}
 // Read conf file and print key-value pairs
 void read_conf(const char *filename) {
     FILE *fp = fopen(filename, "r");
@@ -39,6 +62,9 @@ void read_conf(const char *filename) {
             char *v = trim(val);
             if (strcmp(key, "LOGGING_DIR") == 0) {
                 strncpy(LOGGING_DIR, v, 32);
+                if (ensure_directory_exists(LOGGING_DIR) != 0) {
+                    printf("Warning: Could not ensure LOGGING_DIR exists: %s\n", LOGGING_DIR);
+                }
             }else if(strcmp(key, "DELAY_BETWEEN_CALLS") == 0){
                 DELAY_BETWEEN_CALLS = atof(v);
             }
