@@ -25,13 +25,17 @@ const char* find_conf_file() {
 }
 
 int main() {
+    printf("HELLO\n");
     const char *conf_file = find_conf_file();
     if (!conf_file) {
         fprintf(stderr, "Error: could not locate configuration file.\n");
         return 1;
     }
-    read_conf(conf_file);   
+    printf("Reading conf\n");
+    read_conf(conf_file);  
+    printf("Reading stat\n"); 
     process_stats stats = read_stats();
+    printf("Writing stat\n"); 
     for (int i = 0; i < TOP_N; i++) {
         write_stats(top_processes[i]);
     }
