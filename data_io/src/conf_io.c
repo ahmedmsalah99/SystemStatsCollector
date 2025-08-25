@@ -38,7 +38,7 @@ void read_conf(const char *filename) {
             char *k = trim(key);
             char *v = trim(val);
             if (strcmp(key, "LOGGING_DIR") == 0) {
-                strncpy(LOGGING_DIR, v, 256);
+                strncpy(LOGGING_DIR, v, 32);
             }else if(strcmp(key, "DELAY_BETWEEN_CALLS") == 0){
                 DELAY_BETWEEN_CALLS = atof(v);
             }
