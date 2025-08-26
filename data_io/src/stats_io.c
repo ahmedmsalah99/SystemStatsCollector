@@ -12,9 +12,9 @@
 #include "stats_io.h"
 
 int top_count = 0;
-process_stats top_processes[TOP_N];
-char LOGGING_DIR[32] = "./";
-double DELAY_BETWEEN_CALLS = 10;
+process_stats top_processes[32];
+char LOGGING_DIR[32] = ".";
+int TOP_N = 5;
 
 static int file_exists(const char *filename) {
     struct stat st;

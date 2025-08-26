@@ -66,8 +66,8 @@ void read_conf(const char *filename) {
                 if (ensure_directory_exists(LOGGING_DIR) != 0) {
                     printf("Warning: Could not ensure LOGGING_DIR exists: %s\n", LOGGING_DIR);
                 }
-            }else if(strcmp(key, "DELAY_BETWEEN_CALLS") == 0){
-                DELAY_BETWEEN_CALLS = atof(v);
+            }else if(strcmp(key, "TOP_N") == 0){
+                TOP_N = atof(v);
             }
             printf("Key: '%s' | Value: '%s'\n", k, v);
         }

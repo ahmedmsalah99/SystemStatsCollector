@@ -23,7 +23,7 @@ typedef struct {
 } process_stats;
 
 
-extern process_stats top_processes[TOP_N];
+extern process_stats top_processes[32];
 
 static int file_exists(const char *filename);
 static double timespec_diff_sec(struct timespec a, struct timespec b);
